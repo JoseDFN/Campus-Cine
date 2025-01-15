@@ -6,6 +6,7 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100vh;
 }
 
 .container {
@@ -17,6 +18,7 @@ html {
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+max-height: 20%;
 }
 
 #films {
@@ -27,7 +29,6 @@ justify-content: space-between;
 
 .header{
     max-width: 100%;
-    max-height: 20%;
     margin: 1rem;
 }
 
