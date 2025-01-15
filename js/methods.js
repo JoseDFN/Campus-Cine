@@ -1,27 +1,72 @@
-import { peliculas } from "./data";
-
 // Función para crear tarjetas dinámicamente
-export function crearTarjetas(peliculas, contenedor) {
+export function cardCreate(films, container) {
 
-  peliculas.forEach(pelicula => {
-    const {titulo, imagen, resumen} = pelicula
+  // Iterate over each film object in the films array
+  films.forEach(film => {
+
+    // Destructure the film object to get the title, image, and description properties
+    const {title, image, description} = film
+
+    // Create a new div element and assign the "card" class to it
     const card = document.createElement("div");
     card.classList.add("card");
 
+    // Use template literals to create the HTML structure for the movie card
+    // The title, image, and description are inserted into the respective HTML elements
     card.innerHTML = `
-    <img class= "img__card" src="./img/${imagen}" alt="${titulo}">
-    <div class="content">
-      <h2 class = "title__card">${titulo}</h2>
-      <p class = "description__card">${resumen}</p>
+    <div class="title__container">
+      <h2 class = "title__card">${title}</h2>
+    </div>
+    <div class="image__container">
+      <img class= "img__card" src="./img/${image}" alt="${title}">
+    </div>
+    <div class="description__container">
+      <p class = "description__card">${description}</p>
+    </div>
+    <div class = "button__container">
+      <button class="button__card">Ver más</button>
     </div>
     `;
-    contenedor.appendChild(card);
-  });
-}
 
-export function filmFiltering(query, peliculas){
-  const {titulo} = peliculas;
-  peliculas.then(peliculas => {
-    return peliculas.filter(film => film.toLowerCase().includes(query))
+    // Append the newly created card element to the specified container
+    container.appendChild(card);
+  });
+};
+
+// Function to search for a film and display results
+export function searchFilm(films, query, container) {
+  // Return a new Promise to handle asynchronous operations
+  return new Promise((resolve, reject) => {
+    // Check if the query is empty
+    if (!query) {
+      // Create a message element to inform the user to enter a search term
+      const noResultsMessage = document.createElement('p');
+      noResultsMessage.innerHTML = `<br>Ingresa la pelicula a buscar`;
+      container.appendChild(noResultsMessage);
+      // Reject the promise as no query was provided
+      reject();
+      return;
+    }
+
+    // Filter the films array to find matches with the query
+    const filter = films.filter((film) =>
+      film.title.toLowerCase().includes(query.toLowerCase())
+    );
+
+    // Check if no films matched the query
+    if (filter.length === 0) {
+      // Create a message element to inform the user that no films were found
+      const noResultsMessage = document.createElement('p');
+      noResultsMessage.innerHTML = `<br>Lo sentimos, no tenemos disponible la pelicula ${query} en este momento`;
+      container.appendChild(noResultsMessage);
+      // Resolve the promise as the search operation is complete
+      resolve();
+      return;
+    }
+
+    // If films are found, create cards for each film
+    cardCreate(filter, container);
+    // Resolve the promise as the search operation is complete
+    resolve();
   });
 }

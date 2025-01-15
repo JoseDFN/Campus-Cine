@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: "Roboto", serif;
+    font-size: 1rem;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
 }
 
 html {
@@ -18,7 +26,6 @@ html {
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-max-height: 20%;
 }
 
 #films {
@@ -37,9 +44,13 @@ max-height: 20%;
     height: 100%;
 }
 
-.search__input{
+.search__input--box {
     width: 100%;
-    height: 80%;
+    height: 100%;
+    padding: .5rem;
+    border: 0 none;
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15); /* sombra suave */
 }
 
 .search__bt{
@@ -47,15 +58,92 @@ max-height: 20%;
     height: 100%;
 }
 
-.search__button{
+.search__input--btn{
     width: 100%;
-    height: 80%;
+    height: 100%;
+    padding: 0.5rem;
+    border: 0 none;
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15); /* sombra suave */
 }
 
 .card{
-    max-width: 95%;
+    width: 90%;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     margin: 1rem auto 1rem auto;
-    gap: 1rem;
+    border: 1px transparent solid;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Animamos la sombra y el color del borde */
+}
+
+.title__container{
+    display: flex;
+    height: 10%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.image__container{
+    display: flex;
+    height: 65%;
+    width: 85%;
+    justify-content: center;
+    align-items: center;
+}
+
+.description__container{
+    display: flex;
+    height: 17%;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.button__container{
+    display: flex;
+    height: 8%;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+}
+.title__card{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.img__card{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.description__card{
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+.button__card{
+    width: 100%;
+    height: 65%;
+    border: none;
+    border-radius: 8px;
+    background-color: #333333c4;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Animamos el color del fondo */
+}
+
+.button__card:hover{
+    background-color: #333;
+}
+
+.card:hover{
+    background-color: #f1f1f1;
+    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.16); /* sombra suave */
 }
