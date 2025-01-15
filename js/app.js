@@ -34,5 +34,8 @@ document.getElementById('search__input').addEventListener('keydown', (e) => {
 
     // Call the searchFilm function with the films array, user's search query, and container element
     searchFilm(films, userReq, container__films)
+
+    // Remove focus from the input field to close the mobile keyboard
+    e.target.blur();
   }
 });
