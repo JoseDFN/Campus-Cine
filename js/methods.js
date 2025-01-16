@@ -1,5 +1,5 @@
 // Función para crear tarjetas dinámicamente
-export function cardCreate(films, container) {
+function cardCreate(films, container) {
 
   // Iterate over each film object in the films array
   films.forEach(film => {
@@ -24,7 +24,7 @@ export function cardCreate(films, container) {
       <p class = "description__card">${description}</p>
     </div>
     <div class = "button__container">
-      <button class="button__card">Ver más</button>
+      <button class="button__card" data-name="${title}">Ver más</button>
     </div>
     `;
 
@@ -66,6 +66,47 @@ export function searchFilm(films, query, container) {
 
     // If films are found, create cards for each film
     cardCreate(filter, container);
+    // Resolve the promise as the search operation is complete
+    resolve();
+  });
+}
+
+function popupCreate(film, container){
+  const [{title, image, description, length, genre, cast, dateLaunch}] = film;
+
+  const popup = document.createElement("div");
+  popup.classList.add("popup");
+
+  popup.innerHTML = `
+  <div class="popup__title">
+  <h2>${title}</h2>
+  </div>
+  <div class="popup__image">
+  <img src="./img/${image}" alt="${title}">
+  </div>
+  <div class="popup__description">
+  <p>${description}</p>
+  </div>
+  <div class="popup__info--right">
+  <p>Duración: ${length}</p>
+  <p>Género: ${genre}</p>
+  <p>Fecha De Lanzamiento: ${dateLaunch}</p>
+  </div>
+  <div class="popup__info--left">
+  <p>Cast: ${cast}</p>
+  `;
+
+  container.appendChild(popup);
+}
+
+export function getPopUpInfo (films, query, container){
+  return new Promise((resolve, reject) => {
+    // Filter the films array to find matches with the query
+    const filter = films.filter((film) =>
+      film.title.includes(query)
+    );
+    // If films are found, create the popup for the film
+    popupCreate(filter, container);
     // Resolve the promise as the search operation is complete
     resolve();
   });
