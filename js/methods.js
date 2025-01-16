@@ -1,5 +1,5 @@
 // Función para crear tarjetas dinámicamente
-function cardCreate(films, container) {
+export function cardCreate(films, container) {
 
   // Iterate over each film object in the films array
   films.forEach(film => {
@@ -17,6 +17,7 @@ function cardCreate(films, container) {
     <div class="title__container">
       <h2 class = "title__card">${title}</h2>
     </div>
+    
     <div class="image__container">
       <img class= "img__card" src="./img/${image}" alt="${title}">
     </div>
