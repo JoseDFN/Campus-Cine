@@ -35,42 +35,26 @@ export function cardCreate(films, container) {
 };
 
 // Function to search for a film and display results
-export function searchFilm(films, query, container) {
-  // Return a new Promise to handle asynchronous operations
+export function searchFilm(films, query) {
   return new Promise((resolve, reject) => {
-    // Check if the query is empty
     if (!query) {
-      // Create a message element to inform the user to enter a search term
-      const noResultsMessage = document.createElement('p');
-      noResultsMessage.innerHTML = `<br>Ingresa la pelicula a buscar`;
-      container.appendChild(noResultsMessage);
-      // Reject the promise as no query was provided
-      reject();
+      reject('Ingresa la película a buscar');
       return;
     }
 
-    // Filter the films array to find matches with the query
-    const filter = films.filter((film) =>
+    const filteredFilms = films.filter((film) =>
       film.title.toLowerCase().includes(query.toLowerCase())
     );
 
-    // Check if no films matched the query
-    if (filter.length === 0) {
-      // Create a message element to inform the user that no films were found
-      const noResultsMessage = document.createElement('p');
-      noResultsMessage.innerHTML = `<br>Lo sentimos, no tenemos disponible la pelicula ${query} en este momento`;
-      container.appendChild(noResultsMessage);
-      // Resolve the promise as the search operation is complete
-      resolve();
+    if (filteredFilms.length === 0) {
+      reject(`Lo sentimos, no tenemos disponible la película "${query}" en este momento`);
       return;
     }
 
-    // If films are found, create cards for each film
-    cardCreate(filter, container);
-    // Resolve the promise as the search operation is complete
-    resolve();
+    resolve(filteredFilms);
   });
 }
+
 
 function popupCreate(film, container) {
   const [{title, image, description, length, genre, cast, dateLaunch}] = film;
