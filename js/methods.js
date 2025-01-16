@@ -71,33 +71,52 @@ export function searchFilm(films, query, container) {
   });
 }
 
-function popupCreate(film, container){
+function popupCreate(film, container) {
   const [{title, image, description, length, genre, cast, dateLaunch}] = film;
 
+  // Crear el contenedor del popup
   const popup = document.createElement("div");
   popup.classList.add("popup");
 
+  // Contenido del popup
   popup.innerHTML = `
   <div class="popup__title">
-  <h2>${title}</h2>
+    <h2>${title}</h2>
   </div>
   <div class="popup__image">
-  <img src="./img/${image}" alt="${title}">
+    <img src="./img/${image}" alt="${title}">
   </div>
   <div class="popup__description">
-  <p>${description}</p>
+    <p>${description}</p>
   </div>
   <div class="popup__info--right">
-  <p>Duración: ${length}</p>
-  <p>Género: ${genre}</p>
-  <p>Fecha De Lanzamiento: ${dateLaunch}</p>
+    <p>Duración: ${length}</p>
+    <p>Género: ${genre}</p>
+    <p>Fecha De Lanzamiento: ${dateLaunch}</p>
   </div>
   <div class="popup__info--left">
-  <p>Cast: ${cast}</p>
+    <p>Cast: ${cast}</p>
+  </div>
   `;
 
-  container.appendChild(popup);
+  // Crear el fondo del popup que cubre el resto de la página
+  const overlay = document.createElement("div");
+  overlay.classList.add("overlay");
+
+  // Añadir el popup al contenedor del overlay
+  overlay.appendChild(popup);
+
+  // Agregar el overlay con el popup al contenedor principal
+  container.appendChild(overlay);
+
+  // Cerrar el popup cuando el usuario haga clic fuera de él
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.remove();
+    }
+  });
 }
+
 
 export function getPopUpInfo (films, query, container){
   return new Promise((resolve, reject) => {
