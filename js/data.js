@@ -2,7 +2,7 @@ export const films = [
     {
       title: "Inception",
       image: "Inception.jpeg",
-      description: "Un ladrón que roba secretos corporativos a través del uso de tecnología de sueños debe realizar una misión casi imposible: implantar una idea en la mente de un objetivo.",
+      description: "Un ladrón experto en robar secretos a través de sueños enfrenta el reto de implantar una idea en la mente de su objetivo.",
       length: "148 minutos",
       genre: ["Ciencia ficción", "Acción", "Thriller"],
       cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"],

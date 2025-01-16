@@ -37,5 +37,6 @@ document.getElementById('search__input').addEventListener('keydown', (e) => {
 
     // Remove focus from the input field to close the mobile keyboard
     e.target.blur();
+    document.body.focus();
   }
 });
