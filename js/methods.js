@@ -56,8 +56,8 @@ export function searchFilm(films, query) {
 }
 
 
-function popupCreate(film, container) {
-  const [{title, image, description, length, genre, cast, dateLaunch}] = film;
+export function popupCreate(film, container) {
+  const [{title, image, synopsis, length, genre, cast, dateLaunch}] = film;
 
   // Crear el contenedor del popup
   const popup = document.createElement("div");
@@ -66,21 +66,21 @@ function popupCreate(film, container) {
   // Contenido del popup
   popup.innerHTML = `
   <div class="popup__title">
-    <h2>${title}</h2>
+    <h2 class="popup__element--title">${title}</h2>
   </div>
   <div class="popup__image">
-    <img src="./img/${image}" alt="${title}">
+    <img src="./img/${image}" alt="${title}" class = "popup__element--image">
   </div>
   <div class="popup__description">
-    <p>${description}</p>
+    <p class = "popup__element--description">${synopsis}</p>
   </div>
   <div class="popup__info--right">
-    <p>Duración: ${length}</p>
-    <p>Género: ${genre}</p>
-    <p>Fecha De Lanzamiento: ${dateLaunch}</p>
+    <p class = "popup__element--duration"><span class="bold">Duración:</span> ${length}</p>
+    <p class = "popup__element--genre"><span class="bold">Género:</span> ${genre}</p>
+    <p class = "popup__element--datelaunch"><span class="bold">Fecha De Lanzamiento:</span> ${dateLaunch}</p>
   </div>
   <div class="popup__info--left">
-    <p>Cast: ${cast}</p>
+    <p class = "popup__element--cast"><span class="bold">Cast:</span> ${cast}</p>
   </div>
   `;
 
@@ -103,15 +103,18 @@ function popupCreate(film, container) {
 }
 
 
-export function getPopUpInfo (films, query, container){
+export function getPopUpInfo (films, query){
   return new Promise((resolve, reject) => {
     // Filter the films array to find matches with the query
     const filter = films.filter((film) =>
       film.title.includes(query)
     );
-    // If films are found, create the popup for the film
-    popupCreate(filter, container);
-    // Resolve the promise as the search operation is complete
-    resolve();
+
+    if (filter.length === 0){
+      reject(`No se pudo encontrar la informacion de la película ${query}`);
+      return;
+    }
+
+    resolve(filter);
   });
 }

@@ -12,6 +12,10 @@
         "wdth" 100;
 }
 
+*::-webkit-scrollbar {
+    display: none; /* Oculta las barras de desplazamiento */
+  }
+
 html {
     scroll-behavior: smooth;
     height: 100vh;
@@ -26,6 +30,7 @@ html {
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+margin-top: .5rem;
 }
 
 #films {
@@ -64,7 +69,7 @@ justify-content: space-between;
 .search__input--box {
     width: 100%;
     height: 100%;
-    padding: .5rem;
+    padding: .6rem;
     border: 0 none;
     border-radius: 8px;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15); /* sombra suave */
@@ -85,7 +90,7 @@ justify-content: space-between;
 .search__input--btn{
     width: 100%;
     height: 100%;
-    padding: 0.5rem;
+    padding: 0.6rem;
     border: 0 none;
     border-radius: 8px;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15); /* sombra suave */
@@ -118,6 +123,7 @@ justify-content: space-between;
     width: 85%;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
 }
 
 .description__container{
@@ -144,7 +150,7 @@ justify-content: space-between;
 }
 
 .img__card{
-    width: 97%;
+    width: 100%;
     border-radius: 10px;
 }
 
@@ -188,6 +194,8 @@ justify-content: space-between;
   }
   
   .popup {
+    display: flex;
+    flex-direction: column;
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -195,17 +203,303 @@ justify-content: space-between;
     max-height: 90%;
     overflow-y: auto;
   }
-  
-  .popup__title h2 {
-    margin: 0;
+
+  .popup__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup__element--title{
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0 0.2rem 0.6rem 0.2rem;
   }
   
-  .popup__image img {
-    width: 100%;
+  .popup__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
     height: auto;
   }
-  
-  .popup__description, .popup__info--right, .popup__info--left {
-    margin-top: 10px;
+
+  .popup__element--image{
+    width: 87.5%;
   }
   
+  .popup__description {
+    display: flex;
+    width: 85%;
+    margin: 1.2rem auto;
+    align-items: flex-start; /* Cambia a flex-start para alinear el texto desde el principio */
+    height: 20vh;
+    overflow: auto;
+    white-space: pre-wrap; /* Permite que el texto se ajuste dentro del contenedor */
+    word-wrap: break-word; /* Evita que las palabras largas se desborden */
+  }
+  
+
+  .popup__element--description{
+    text-align: justify;
+    padding: .1rem auto;
+  }
+  .popup__info--right{
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    margin: 1rem auto;
+    align-items: start;
+    justify-content: center;
+    white-space: wrap;
+  }
+  
+  .popup__info--left{
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    margin: 1rem auto;
+    align-items: start;
+    justify-content: center;
+    white-space: wrap;
+  }
+
+  .bold{
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .popup__element--duration, .popup__element--genre, .popup__element, .popup__element--cast{
+    text-align: justify;
+  }
+
+  .title__container--header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .title__header{
+    margin: .3rem;
+    font-size: 2.1rem;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 340px){
+    /* Adaptamos los estilos para pantallas pequeñas */
+   .container{
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+   }
+   .nav{
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: .7rem;
+    }
+    .search__bar{
+      width: 90%;
+      display: flex;
+    }
+    .search__input--box{
+      width: 100%;
+      padding:.5rem;
+    }
+
+    .search__input--btn{
+        padding: .5rem;
+    }
+
+    .title__container{
+        height: 7%;
+    }
+
+    .popup__element--image{
+        width: 100%;
+      }
+
+      .popup__description{
+        height: 10vh;
+      }
+  }
+  @media screen and (min-width: 576px){
+    *{
+        font-size: 1.05rem;
+    }
+    .card{
+        width: 80%;
+        height: 84vh;
+    }
+    .img__card{
+        width: 78%;
+        max-height: 100%;
+    }
+
+    .search__input--box{
+        padding:.75rem;
+    }
+
+    .search__input--btn{
+        padding:.75rem;
+    }
+
+    .popup{
+        max-width: 78%;
+        max-height: 88%;
+    }
+
+    .popup__element--image{
+        width: 57%;
+    }
+  }
+  @media screen and (min-width: 768px){
+    *{
+        font-size: 1.05rem;
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap; /* Permite que las tarjetas se ajusten a la siguiente línea */
+        gap: 1rem; /* Espacio entre las tarjetas */
+    }
+    .card {
+        flex-basis: calc(50% - 1rem);
+        /* Cada tarjeta ocupará el 50% del contenedor menos el espacio entre ellas */
+        box-sizing: border-box;
+        /* Asegura que el padding y los márgenes no afecten el tamaño de la tarjeta */
+        height: auto;
+        /* Ajusta la altura según el contenido */
+    }
+    .img__card{
+        width: 100%;
+        max-height: 100%;
+    }
+    .search__input--box{
+        padding:.85rem;
+    }
+
+    .search__input--btn{
+        padding:.85rem;
+    }
+    .popup{
+        max-width: 80%;
+        max-height: 88%;
+    }
+
+    .popup__element--image{
+        width: 40.5%;
+    }
+  }
+  @media screen and (min-width: 1150px){
+    *{
+        font-size: 1.1rem;
+    }
+    .container {
+        max-width: 100%;
+        display: flex;
+        flex-wrap: wrap; /* Permite que las tarjetas se ajusten a la siguiente línea */
+        gap: 1rem; /* Espacio entre las tarjetas */
+    }
+    .card {
+        flex-basis: calc(33% - 1rem);
+        /* Cada tarjeta ocupará el 50% del contenedor menos el espacio entre ellas */
+        box-sizing: border-box;
+        /* Asegura que el padding y los márgenes no afecten el tamaño de la tarjeta */
+        height: auto;
+        /* Ajusta la altura según el contenido */
+    }
+    .popup{
+        max-width: 46%;
+        max-height: 92%;
+    }
+    .popup__element--image{
+        width: 53%;
+        max-height: 100%;
+    }
+  }
+
+  @media screen and (min-width: 1248px){
+    *{
+        font-size: 1.1rem;
+    }
+    .container {
+        max-width: 100%;
+        display: flex;
+        flex-wrap: wrap; /* Permite que las tarjetas se ajusten a la siguiente línea */
+        gap: 1rem; /* Espacio entre las tarjetas */
+    }
+    .card {
+        flex-basis: calc(25% - 1rem);
+        /* Cada tarjeta ocupará el 25% del contenedor menos el espacio entre ellas */
+        box-sizing: border-box;
+        /* Asegura que el padding y los márgenes no afecten el tamaño de la tarjeta */
+        height: 100%;
+        /* Ajusta la altura según el contenido */
+        align-items: center;
+        justify-content: center;
+        margin: auto 0;
+    }
+
+    .description__card {
+        font-size: 1rem;
+        margin: .8rem 0;
+    }
+
+    .img__card{
+        width: 80%;
+    }
+
+    .button__card{
+        padding: .4rem;
+    }
+
+    .popup__image{
+        max-width: 100%;
+    }
+
+    .popup__element--image{
+        width: 47%;
+        margin: 0 auto;
+    }
+  }
+
+  @media screen and (min-width: 1248px){
+    *{
+        font-size: 1.1rem;
+    }
+    .container {
+        margin: 0 auto;
+        max-width: 90%;
+        display: flex;
+        flex-wrap: wrap; /* Permite que las tarjetas se ajusten a la siguiente línea */
+        gap: 1rem; /* Espacio entre las tarjetas */
+    }
+    .card {
+        flex-basis: calc(25% - 1rem);
+        /* Cada tarjeta ocupará el 25% del contenedor menos el espacio entre ellas */
+        box-sizing: border-box;
+        /* Asegura que el padding y los márgenes no afecten el tamaño de la tarjeta */
+        height: 100%;
+        /* Ajusta la altura según el contenido */
+        align-items: center;
+        justify-content: center;
+        margin: auto 0;
+    }
+
+    .title__header {
+        font-size: 4rem;
+    }
+
+    .button__card{
+        padding: .5rem;
+    }
+
+    .popup__element--image{
+        width: 41.5%;
+        margin: 0 auto;
+    }
+
+    .popup__element--title{
+        font-size: 2.5rem;
+    }
+  }
